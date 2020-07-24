@@ -1,0 +1,43 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: "dependencies.gradle"
+apply from: "config.gradle"
+apply plugin: 'com.jakewharton.butterknife'
+buildscript {
+    ext.kotlin_version = '1.2.51'
+    repositories {
+        google()
+        maven { url 'https://jitpack.io' }
+        jcenter()
+        maven { url "https://maven.google.com" }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.bugtags.library:bugtags-gradle:latest.integration'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
+        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+        classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.4'
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        mavenCentral()//如果 jcenter 很慢，尝试添加 mavenCentral 并调整到首行
+        maven { url "https://maven.google.com" }
+        flatDir {
+            dirs 'libs'
+        }
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

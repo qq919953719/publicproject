@@ -1,0 +1,45 @@
+ext {
+    //DEBUGMODE=true为测试环境；DEBUGMODE=false正式环境，上线打包时设置。
+    DEBUGMODE = false
+    app = [
+            app_packagename: "com.cuichuang.common",
+            app_name       : "崔闯的通用项目框架包",
+    ]
+    debug = [
+            versionCode    : 1,
+            versionName    : "1.0",
+
+            // app_base_domain: "http://ngy4.dangjian.025nj.com/",
+            app_base_domain: "http://dangjiantest.025nj.com/",
+    ]
+    release = [
+            versionCode    : 1,
+            versionName    : "1.0",
+
+
+            //app_base_domain: "http://ngy4.dangjian.025nj.com/",
+            app_base_domain: "http://dangjiantest.025nj.com/",
+
+
+    ]
+
+    ui = [
+            colorPrimary             : "#f13e3a",
+            colorPrimaryDark         : "#f13e3a",
+            colorAccent              : "#f13e3a",
+            color_item_dark          : "#f13e3a",
+            color_item_normal        : "#f13e3a",
+            updater_color_item_dark  : "#f13e3a",
+            updater_color_item_normal: "#f13e3a"
+    ]
+
+    frame = [
+//            JPUSH_APPKEY     : "10144d44571f063df26a337e",//JPush上注册的包名对应的appkey.//ngy3
+JPUSH_APPKEY     : "791077d444bb873e21d8cd92",//JPush上注册的包名对应的appkey.//ngy4
+JPUSH_CHANNEL    : "developer-default", //暂时填写默认值即可.
+bugtags_appkey   : "3b99fec29709ada7c1f7ce4bd8682688",
+bugtags_appSecret: "0678f888bab8a0e3d2b4fc7e0c1e29c5",
+UMENG_CHANNEL    : "Umeng",
+UMENG_APPKEY     : "5e7b1f34167edd5c6c00001a",
+    ]
+}

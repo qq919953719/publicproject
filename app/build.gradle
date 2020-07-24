@@ -1,0 +1,130 @@
+apply plugin: 'com.android.application'
+
+android {
+    //    signingConfigs {
+//        debug {
+//            keyAlias 'xgy'
+//            keyPassword '123456789'
+//            storeFile file('D:/desktable/desktable/all_key/龙虎网党建/xgy_library.jks')
+//            storePassword '123456789'
+//        }
+//        release {
+//            keyAlias 'xgy'
+//            keyPassword '123456789'
+//            storeFile file('D:/desktable/desktable/all_key/龙虎网党建/xgy_library.jks')
+//            storePassword '123456789'
+//        }
+//    }
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        applicationId rootProject.ext.app["app_packagename"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk {
+            //选择要添加的对应cpu类型的.so库。
+            abiFilters 'armeabi', 'armeabi-v7a'
+            // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
+        }
+
+
+        manifestPlaceholders = [
+                JPUSH_PKGNAME: applicationId,
+                JPUSH_APPKEY : rootProject.ext.frame["JPUSH_APPKEY"],
+                JPUSH_CHANNEL: rootProject.ext.frame["JPUSH_CHANNEL"],
+                UMENG_CHANNEL: rootProject.ext.frame["UMENG_CHANNEL"],
+                UMENG_APPKEY : rootProject.ext.frame["UMENG_APPKEY"]
+        ]
+
+        //应用 Bugtags 插件
+        apply plugin: 'com.bugtags.library.plugin'
+        //Bugtags 插件配置
+        bugtags {
+            //自动上传符号表功能配置，如果需要根据 build varint 配置，请参考帮助中心->符号表->Android 符号表->配置自动上传符号表
+            appKey rootProject.ext.frame["bugtags_appkey"]  //这里是你的 appKey
+            appSecret rootProject.ext.frame["bugtags_appSecret"]    //这里是你的 appSecret，管理员在设置页可以查看
+            mappingUploadEnabled true
+            //网络跟踪功能配置(企业版)
+            trackingNetworkEnabled true
+        }
+
+//        //---常规配置项---------------------------------
+        resValue "string", "app_name", rootProject.ext.app["app_name"]
+        resValue "bool", "app.debugmode", "" + rootProject.ext.DEBUGMODE
+        resValue "string", "bugtags_appkey", rootProject.ext.frame["bugtags_appkey"]
+
+        if (rootProject.ext.DEBUGMODE) {//测试环境
+            versionCode rootProject.ext.debug["versionCode"]
+            versionName rootProject.ext.debug["versionName"]
+            resValue "string", "app.base_domain", rootProject.ext.debug["app_base_domain"]
+        } else {//正式环境
+            versionCode rootProject.ext.release["versionCode"]
+            versionName rootProject.ext.release["versionName"]
+            resValue "string", "app.base_domain", rootProject.ext.release["app_base_domain"]
+        }
+        applicationVariants.all { variant ->    //修改Apk名字
+            variant.outputs.all { output ->
+                if (rootProject.ext.DEBUGMODE) {
+                    outputFileName = "yunjia_cc${variant.versionName}_${variant.buildType.name}_test.apk"
+                } else {
+                    outputFileName = "yunjia_cc${variant.versionName}_${variant.buildType.name}_release.apk"
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    /**
+     * 为了解决Static interface methods are only supported starting with Android N (--min-api 24): void butterknife.Unbinder.lambda$static$0()这个问题
+     */
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'com.jakewharton:butterknife:10.2.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.1'
+    implementation 'com.bugtags.library:bugtags-lib:latest.integration'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.bugtags.library:bugtags-lib:latest.integration'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation('com.github.LuckSiege.PictureSelector:picture_library:v2.1.9') {
+        exclude(group: 'com.android.support', module: 'appcompat-v7')
+        //exclude(group: 'com.github.bumptech.glide', module: 'glide')
+    }
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.5.0'
+    // 此处以JPush 3.0.9 版本为例。
+    implementation 'cn.jiguang.sdk:jpush:3.0.9'
+    // 此处以JCore 1.1.7 版本为例。
+    implementation 'cn.jiguang.sdk:jcore:1.1.7'
+    implementation 'com.gyf.barlibrary:barlibrary:2.2.7'
+    api 'com.facebook.stetho:stetho:1.5.0'
+    api 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

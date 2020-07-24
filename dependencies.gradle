@@ -1,0 +1,17 @@
+ext {
+    android = [
+            compileSdkVersion       : 28,
+            buildToolsVersion       : "28.0.3",
+            minSdkVersion           : 16,
+            targetSdkVersion        : 28,
+            androidSupportSdkVersion: "23.0.0",
+    ]
+    dependencies = [
+            "multidex"                    : "com.android.support:multidex:1.0.1",
+            "appcompat-v7"                : "com.android.support:appcompat-v7:${android["androidSupportSdkVersion"]}",
+            "design"                      : "com.android.support:design:${android["androidSupportSdkVersion"]}",
+
+    ]
+
+
+}
