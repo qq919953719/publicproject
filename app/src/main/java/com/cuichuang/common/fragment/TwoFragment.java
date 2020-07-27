@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.cuichuang.common.R;
 import com.cuichuang.common.base.BaseFragment;
+import com.cuichuang.common.base.BasePresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,10 +20,10 @@ import com.cuichuang.common.base.BaseFragment;
 public class TwoFragment extends BaseFragment {
 
 
-
-
-
-
+    @Override
+    protected BasePresenter createPresenter() {
+        return null;
+    }
 
     @Override
     protected int getContentId() {

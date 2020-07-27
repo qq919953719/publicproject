@@ -22,10 +22,17 @@
         android:id="@+id/lv_main_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="50dp"
+        android:paddingBottom="1dp"
+        android:layout_marginTop="@dimen/dp_50"
+        android:background="@color/transparent_white"
+        android:layout_marginBottom="@dimen/dp_50"
         android:orientation="horizontal">
 
+        <com.cuichuang.common.widget.NoScrollViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/app_bar" />
     </LinearLayout>
 
     <LinearLayout

@@ -1,7 +1,9 @@
 package com.cuichuang.common.util;
 
+import android.os.Environment;
+
 /**
- * Created by CK on 2017/7/6.
+ * Created by CC on 2017/7/6.
  */
 public class Consts {
     public static String BASE_DOMAIN = "";
@@ -20,7 +22,10 @@ public class Consts {
     public static String SP_PWD= "sp_pwd";
     public static String SP_ISREMBERPWD= "sp_isremberpwd";
     public static final String SD_TEMPAPK = SD_ROOT + "temp.apk";
-
+    //视频文件存储路径
+    public static String baseFileName = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + "yunjiavideo/";
+    //服务器返回成功的 cdoe
+    public static int basecode = 0;
     /**
      * 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY
      */

@@ -5,13 +5,13 @@ import com.cuichuang.common.BuildConfig;
 
 
 /**
- * Created by xys on 2017/4/20 0020.
+ * Created by CC on 2017/4/20 0020.
  * 日志工具类
  */
 
 public class ULog {
     public static final boolean isDebug = BuildConfig.DEBUG;
-    private static final String TAG = "ck";
+    private static final String TAG = "cc";
     // 下面四个是默认tag的函数
     public static void i(String msg) {
         if (isDebug)

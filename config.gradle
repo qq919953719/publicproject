@@ -9,16 +9,16 @@ ext {
             versionCode    : 1,
             versionName    : "1.0",
 
-            // app_base_domain: "http://ngy4.dangjian.025nj.com/",
-            app_base_domain: "http://dangjiantest.025nj.com/",
+            app_base_domain: "http://zhdj.xzcit.cn/",
+            // app_base_domain: "http://dangjiantest.025nj.com/",
     ]
     release = [
             versionCode    : 1,
             versionName    : "1.0",
 
 
-            //app_base_domain: "http://ngy4.dangjian.025nj.com/",
-            app_base_domain: "http://dangjiantest.025nj.com/",
+            app_base_domain: "http://zhdj.xzcit.cn/",
+         //   app_base_domain: "http://dangjiantest.025nj.com/",
 
 
     ]

@@ -2,6 +2,7 @@ package com.cuichuang.common.base;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 
 import com.bugtags.library.Bugtags;
 import com.bugtags.library.BugtagsOptions;
@@ -9,6 +10,7 @@ import com.cuichuang.common.BuildConfig;
 import com.cuichuang.common.R;
 import com.cuichuang.common.util.Consts;
 import com.cuichuang.common.util.ULog;
+import com.cuichuang.common.util.Utils;
 import com.facebook.stetho.Stetho;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
@@ -26,10 +28,13 @@ public class myApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
+        Consts.BASE_DOMAIN = getResources().getString(R.string.app_base_domain);
+        Consts.BASE_URL = Consts.BASE_DOMAIN + "index.php/app/";
 //WbSdk.install(this,new AuthInfo(this, Consts.SinaAPP_KEY, Consts.SINAREDIRECT_URL, Consts.SCOPE));
         //禁止默认的页面统计方式，这样将不会再自动统计Activity。
         MobclickAgent.openActivityDurationTrack(false);
-       // OkHttpUtil.getInstance().init(getApplicationContext());
+        // OkHttpUtil.getInstance().init(getApplicationContext());
 
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
 
@@ -70,8 +75,7 @@ public class myApplication extends Application {
 
         // Bugtags.start("3b99fec29709ada7c1f7ce4bd8682688", this, Bugtags.BTGInvocationEventBubble, options);
         Bugtags.start(getResources().getString(R.string.bugtags_appkey), this, Bugtags.BTGInvocationEventNone, options);
-        Consts.BASE_DOMAIN = getResources().getString(R.string.app_base_domain);
-        Consts.BASE_URL = Consts.BASE_DOMAIN + "index.php/app";
+
         //EnterCheckUtil.getInstance().init(this);
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this);
@@ -109,5 +113,12 @@ public class myApplication extends Application {
 
 
         }
+    }
+
+
+    private static Context mContext;
+
+    public static Context getContext() {
+        return mContext;
     }
 }
