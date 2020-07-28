@@ -35,7 +35,7 @@ ext {
 
     frame = [
 //            JPUSH_APPKEY     : "10144d44571f063df26a337e",//JPush上注册的包名对应的appkey.//ngy3
-JPUSH_APPKEY     : "791077d444bb873e21d8cd92",//JPush上注册的包名对应的appkey.//ngy4
+JPUSH_APPKEY     : "0b7230215291708070f70a6a",//JPush上注册的包名对应的appkey.//ngy4
 JPUSH_CHANNEL    : "developer-default", //暂时填写默认值即可.
 bugtags_appkey   : "3b99fec29709ada7c1f7ce4bd8682688",
 bugtags_appSecret: "0678f888bab8a0e3d2b4fc7e0c1e29c5",
