@@ -8,7 +8,9 @@ import com.bugtags.library.Bugtags;
 import com.bugtags.library.BugtagsOptions;
 import com.cuichuang.common.BuildConfig;
 import com.cuichuang.common.R;
+import com.cuichuang.common.bean.LoginBean;
 import com.cuichuang.common.util.Consts;
+import com.cuichuang.common.util.EnterCheckUtil;
 import com.cuichuang.common.util.ULog;
 import com.cuichuang.common.util.Utils;
 import com.facebook.stetho.Stetho;
@@ -25,10 +27,29 @@ import cn.jpush.android.api.JPushInterface;
 public class myApplication extends Application {
     public List<Activity> mActivityList = new LinkedList<>();
 
+    public boolean isLoginReturn() {
+        return LoginReturn;
+    }
+
+    public void setLoginReturn(boolean loginReturn) {
+        LoginReturn = loginReturn;
+    }
+
+    public boolean LoginReturn = false;
+    public LoginBean getmLoginBean() {
+        return mLoginBean;
+    }
+
+    public void setmLoginBean(LoginBean mLoginBean) {
+        this.mLoginBean = mLoginBean;
+    }
+
+    public LoginBean mLoginBean;
     @Override
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        EnterCheckUtil.getInstance().init(this);
         Consts.BASE_DOMAIN = getResources().getString(R.string.app_base_domain);
         Consts.BASE_URL = Consts.BASE_DOMAIN + "index.php/app/";
 //WbSdk.install(this,new AuthInfo(this, Consts.SinaAPP_KEY, Consts.SINAREDIRECT_URL, Consts.SCOPE));

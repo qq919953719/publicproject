@@ -15,6 +15,7 @@ import com.cuichuang.common.base.view.MainBean;
 import com.cuichuang.common.base.view.MainView;
 import com.cuichuang.common.bean.LoginBean;
 import com.cuichuang.common.presenter.MainPresenter;
+import com.cuichuang.common.util.EnterCheckUtil;
 
 import java.util.List;
 
@@ -73,7 +74,7 @@ public class OneFragment extends BaseFragment<MainPresenter> implements MainView
 
     @Override
     public void onLoginSuccess(BaseModel<LoginBean> mLoginBean) {
-
         tvSetLoginInfo.setText(mLoginBean.getData().getRealname());
+        EnterCheckUtil.getInstance().saveLogin(mLoginBean.getData());
     }
 }
